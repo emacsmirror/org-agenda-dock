@@ -1,4 +1,4 @@
-#+title: org-agenda-dock - Integrate org-mode with Gnome's Dock or KDE's taskbar
+#+title: org-agenda-dock - Number of TODOs on the Dock
 #+author: Aleksei Gusev
 #+language: en
 
