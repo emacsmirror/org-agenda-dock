@@ -16,7 +16,7 @@ Any dock supporting Unity's Launcher API should be compatible. Those confirmed t
 * Configuration
 
 #+begin_src emacs-lisp
-(use-package org-agenda-dock-mode
+(use-package org-agenda-dock
   :init
   (org-agenda-dock-mode +1)
 #+end_src
