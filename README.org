@@ -1,0 +1,44 @@
+#+title: org-agenda-dock - Integrate org-mode with Gnome's Dock or KDE's taskbar
+#+author: Aleksei Gusev
+#+language: en
+
+#+html: <a href="https://www.gnu.org/software/emacs/"><img alt="GNU Emacs" src="https://img.shields.io/badge/GNU_Emacs-28.1%2B-%237F5AB6?logo=gnuemacs&logoColor=white"/></a>
+
+~org-agenda-dock-mode~ integrates Org mode with your favorite desktop environment by displaying a badge that shows the number of scheduled TODOs for the current day.
+
+#+html: <img src="https://github.com/hron/org-agenda-dock/blob/main/screenshot.png?raw=true">
+
+Any dock supporting Unity's Launcher API should be compatible. Those confirmed to work well include:
+
+  - KDE's taskbar
+  - Gnome Shell with "Dash to Dock" extension
+
+* Configuration
+
+#+begin_src emacs-lisp
+(use-package org-agenda-dock-mode
+  :init
+  (org-agenda-dock-mode +1)
+#+end_src
+
+By default, ~org-agenda-dock~ targets the Emacs entry in your dock, identifying it via the ~emacs.desktop~ file. If you launch Org mode using a separate desktop file, such as ~org-mode.desktop~ (as shown below), you should set the ~dock-desktop-entry~ variable to "org-mode" to ensure it matches your custom desktop entry.
+
+#+begin_src desktop file=org-mode.desktop
+[Desktop Entry]
+Categories=Utility
+Comment=Get Things Done with org-mode
+Exec=emacs --name org-mode --eval "(org-agenda-list)"
+Icon=org-mode-unicorn
+Name=GTD
+StartupNotify=true
+StartupWMClass=org-mode
+Terminal=false
+Type=Application
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package org-agenda-dock
+  :init
+  (setq dock-desktop-entry "org-mode")
+  (org-agenda-dock-mode +1)
+#+end_src

@@ -1,4 +1,4 @@
-;;; org-agenda-dock.el ---  Show a badge with number of todos at dock -*- lexical-binding: t; -*-
+;;; org-agenda-dock.el ---  Integrate org-mode with Gnome's Dock or KDE's taskbar -*- lexical-binding: t; -*-
 ;;
 ;; Copyright (C) 2025 Aleksei Gusev
 ;;
