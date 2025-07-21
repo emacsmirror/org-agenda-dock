@@ -9,6 +9,7 @@
 ;; Keywords: convenience org dock desktop
 ;; Homepage: https://github.com/hron/org-agenda-dock.el
 ;; Package-Requires: ((emacs "28.1") (dock "0.0.1"))
+;; SPDX-License-Identifier: MIT
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
