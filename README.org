@@ -23,7 +23,7 @@ Any dock supporting Unity's Launcher API should be compatible. Those confirmed t
 
 By default, ~org-agenda-dock~ targets the Emacs entry in your dock, identifying it via the ~emacs.desktop~ file. If you launch Org mode using a separate desktop file, such as ~org-mode.desktop~ (as shown below), you should set the ~dock-desktop-entry~ variable to "org-mode" to ensure it matches your custom desktop entry.
 
-#+begin_src desktop file=org-mode.desktop
+#+begin_src desktop
 [Desktop Entry]
 Categories=Utility
 Comment=Get Things Done with org-mode

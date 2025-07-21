@@ -7,8 +7,8 @@
 ;; Created: July 18, 2025
 ;; Version: 0.0.1
 ;; Keywords: convenience org dock desktop
-;; Homepage: https://github.com/hron/org-agenda-dock.el
-;; Package-Requires: ((emacs "28.1") (dock "0.0.1"))
+;; Homepage: https://github.com/hron/org-agenda-dock
+;; Package-Requires: ((emacs "28.1") (dock "0.0.1") (org "9.0"))
 ;; SPDX-License-Identifier: MIT
 ;;
 ;; This file is not part of GNU Emacs.
@@ -20,6 +20,16 @@
 ;;; Code:
 
 (require 'dock)
+(require 'org-agenda)
+
+(defgroup org-agenda-dock nil
+  "Integrate `org-mode' with Gnome's Dock or KDE's taskbar."
+  :link '(url-link :tag "Website" "https://github.com/hron/org-agenda-dock")
+  :link '(emacs-library-link :tag "Library Source" "org-agenda-dock.el")
+  :group 'convenience
+  :group 'environment
+  :group 'dock
+  :prefix "org-agenda-dock-")
 
 (defun org-agenda-dock--update ()
   "Update the count badge on the Emacs icon in the dock."
@@ -41,7 +51,8 @@
    0))
 
 (defun org-agenda-dock--update-after-save ()
-  "Update the badge on the Dock if the current file is listed in variable `org-agenda-files'."
+  "Update the badge with number of TODOs on the Dock.
+It uses variable `org-agenda-files' to detect which files should be checked."
   (let ((buffer-base-filename (file-name-nondirectory (buffer-file-name))))
     (when (seq-contains-p org-agenda-files buffer-base-filename)
       (org-agenda-dock--update))))
@@ -52,7 +63,7 @@
 
 ;;;###autoload
 (define-minor-mode org-agenda-dock-mode
-  "Show a badge on the Emacs icon in the Dock with the number of TODOs scheduled for today."
+  "Show a badge with number of TODOs scheduled for today on the Dock."
   :global t
   :lighter nil
   (let ((commands-to-advice '(org-schedule
