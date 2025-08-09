@@ -61,6 +61,9 @@ It uses variable `org-agenda-files' to detect which files should be checked."
   "Update the badge on the Dock after `org-schedule' and `org-deadline'."
   (org-agenda-dock--update))
 
+(defvar org-agenda-dock--timer nil
+  "Timer to track periodic updates of count badge.")
+
 ;;;###autoload
 (define-minor-mode org-agenda-dock-mode
   "Show a badge with number of TODOs scheduled for today on the Dock."
@@ -76,13 +79,17 @@ It uses variable `org-agenda-files' to detect which files should be checked."
     (remove-hook 'after-save-hook #'org-agenda-dock--update-after-save)
     (dolist (func commands-to-advice)
       (advice-remove func #'org-agenda-dock--update-after-reschedule))
+    (when org-agenda-dock--timer
+      (cancel-timer org-agenda-dock--timer)
+      (setq org-agenda-dock--timer nil))
 
     (when org-agenda-dock-mode
       (add-hook 'org-agenda-finalize-hook #'org-agenda-dock--update)
       (add-hook 'org-after-todo-state-change-hook #'org-agenda-dock--update)
       (add-hook 'after-save-hook #'org-agenda-dock--update-after-save)
       (dolist (func commands-to-advice)
-        (advice-add func :after #'org-agenda-dock--update-after-reschedule)))))
+        (advice-add func :after #'org-agenda-dock--update-after-reschedule))
+      (setq org-agenda-dock--timer (run-at-time nil (* 15 60) #'org-agenda-dock--update)))))
 
 (provide 'org-agenda-dock)
 ;;; org-agenda-dock.el ends here
