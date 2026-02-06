@@ -43,6 +43,7 @@
   (seq-reduce
    (lambda (count org-file)
      (let* ((org-agenda-skip-scheduled-if-done t)
+            (org-deadline-warning-days 0)
             (org-file (concat org-directory "/" org-file))
             (today (calendar-current-date))
             (today-todos (org-agenda-get-day-entries org-file today)))
